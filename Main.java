@@ -1,50 +1,58 @@
 package com.company;
+import java.util.Scanner;
 
 public class Main {
 
-    public static float priceOfShipping(float orderValue,
-                                        boolean saturdayDelivery,
-                                        String destination) {
-        float deliverCost = 0;
-        switch (destination) {
-            case "US":
-                deliverCost = 20.00f;
-                if (orderValue > 100) {
-                    deliverCost -= 5.00f;
-                }
-                if (saturdayDelivery) {
-                    deliverCost += 10.00f;
-                }
-                break;
-            case "Mexico":
-                deliverCost = 32.00f;
-                break;
-            default:
-                deliverCost = 25.00f;
-                if (orderValue > 100) {
-                    deliverCost -= 7.00f;
-                }
-                if (saturdayDelivery) {
-                    deliverCost += 12.00f;
-                }
-                break;
+    public static String checkHealth(String name, float temp, int systolic, int diastolic, float height) {
+        String comments = "Patient: " + name + ".  ";
+        comments += "Has a blood pressure of " + diastolic + "/" + systolic + ".  ";
+        if (temp < 72) {
+            comments += "Patient has probably been dead for several days.";
+        } else if (temp < 87.5) {
+            comments += "Just recently dead.";
+        } else if (temp < 96) {
+            comments += "Get patient a blanket.";
+        } else if (temp < 99) {
+            comments += "Normal.";
+        } else if (temp < 102) {
+            comments += "Suggest patient take some aspirin.";
+        } else if (temp < 106) {
+            comments += "Call the ER.";
+        } else {
+            comments += "Call the CDC.";
         }
 
-        return deliverCost;
+        if (height < 1.5) {
+            comments += "Suggest growth hormones.";
+        } else if (height > 2.4) {
+            comments += "Suggest they try out for the Mavs.";
+        }
+
+        return comments;
     }
 
     public static void main(String[] args) {
 
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Name:");
+        String name = in.nextLine();
+        System.out.print("Temp:");
+        String temp = in.nextLine();
+        float fTemp = Float.parseFloat(temp);
+        System.out.print("Enter systolic:");
+        String systolic = in.nextLine();
+        int iSystolic = Integer.parseInt(systolic);
+        System.out.print("Enter diastolic:");
+        String diastolic = in.nextLine();
+        int iDiastolic = Integer.parseInt(diastolic);
+        System.out.print("Enter height in Meters:");
+        String height = in.nextLine();
+        float fHeight = Float.parseFloat(height);
 
-        System.out.println(priceOfShipping(200, true, "Canada"));
+        System.out.println(checkHealth(name, fTemp, iSystolic, iDiastolic, fHeight));
 
-        float returnFromMethod = priceOfShipping(200, true, "Canada");
-        System.out.println(returnFromMethod);
 
-        returnFromMethod = priceOfShipping(100, false, "Mexico");
-        System.out.println(returnFromMethod);
 
-        System.out.println(priceOfShipping(50, true, "US"));
 
 
 
